@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 function handleWrongMethod(req: Request, res: Response) {
-	res.json({
+	res.status(405).json({
 		message: `${req.method} method not allowed on ${req.url}`,
 	});
 }
