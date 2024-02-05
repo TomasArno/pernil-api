@@ -1,5 +1,9 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-const apiRouter = Router();
+const router = Router();
 
-export default apiRouter;
+router.get('/test', (req, res) => {
+	res.json({ response: true });
+});
+
+export default router;
