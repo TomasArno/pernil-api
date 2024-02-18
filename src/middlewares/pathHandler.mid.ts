@@ -1,8 +1,9 @@
-function pathHandler(req, res, next) {
-  return res.json({
-    statusCode: 404,
-    response: `${req.method} ${req.url} resource not found`,
-  });
+import { Request, Response } from 'express';
+
+function handlePathError(req: Request, res: Response) {
+	res.status(404).json({
+		message: `${req.method} ${req.url} resource not found`,
+	});
 }
 
-export default pathHandler;
+export default handlePathError;
