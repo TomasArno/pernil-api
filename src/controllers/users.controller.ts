@@ -1,9 +1,10 @@
-import { Request, Response } from "express";
+import { Users } from "../models/index.model";
+import { BaseController } from "./index.controller";
 
-async function getAll(req: Request, res: Response) {
-  res.json({
-    message: "This is a test",
-  });
+abstract class UsersController extends BaseController {
+  constructor() {
+    super(Users);
+  }
 }
 
-export { getAll };
+export default UsersController;

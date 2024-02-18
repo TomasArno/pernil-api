@@ -1,13 +1,9 @@
 import { sequelize, DataTypes } from "../database";
 
-export const Clients = sequelize.define("Client", {
+export const Suppliers = sequelize.define("Supplier", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
-  },
-  address: {
-    type: DataTypes.STRING,
-    allowNull: true,
   },
   phoneNumber: {
     type: DataTypes.STRING,

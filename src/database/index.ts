@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes, Op } from "sequelize";
+import { Sequelize, DataTypes, Op, Model } from "sequelize";
 
 const sequelize = new Sequelize(process.env.DB_URL as string, {
   dialect: "postgres",
@@ -12,4 +12,4 @@ try {
   console.error("Unable to connect to the database:", error);
 }
 
-export { sequelize, DataTypes, Op };
+export { sequelize, DataTypes, Op, Model };

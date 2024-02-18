@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import usersRouter from "./users.router.api";
 import clientsRouter from "./clients.router.api";
+import suppliersRouter from "./suppliers.router.api";
 import categoriesRouter from "./categories.router.api";
 import productsRouter from "./products.router.api";
 import movementsRouter from "./movements.router.api";
@@ -18,6 +19,7 @@ const router = Router();
 router.all("/auth", authRouter);
 router.all("/users", usersRouter);
 router.all("/clients", clientsRouter);
+router.all("/suppliers", suppliersRouter);
 router.all("/products", productsRouter);
 router.all("/movements", movementsRouter);
 router.all("/categories", categoriesRouter);

@@ -1,9 +1,10 @@
-import { Request, Response } from 'express';
+import { Products } from "../models/index.model";
+import { BaseController } from "./index.controller";
 
-async function getAll(req: Request, res: Response) {
-	res.json({
-		message: 'This is a test',
-	});
+class ProductsController extends BaseController {
+  constructor() {
+    super(Products);
+  }
 }
 
-export { getAll };
+export default ProductsController;

@@ -2,7 +2,7 @@ import { Router } from "express";
 
 // CONTROLLERS
 
-import UsersController from "../../controllers/users.controller";
+import SuppliersController from "../../controllers/suppliers.controller";
 
 // ROUTER
 

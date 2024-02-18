@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-// MODELS
+// CONTROLLERS
 
-import { Categories } from "../../models/index.model";
+import CategoriesController from "../../controllers/categories.controller";
 
 // ROUTER
 

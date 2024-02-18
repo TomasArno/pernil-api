@@ -1,9 +1,10 @@
-import { Request, Response } from 'express';
+import { Movements } from "../models/index.model";
+import { BaseController } from "./index.controller";
 
-async function getAll(req: Request, res: Response) {
-	res.json({
-		message: 'This is a test',
-	});
+class MovementsController extends BaseController {
+  constructor() {
+    super(Movements);
+  }
 }
 
-export { getAll };
+export default MovementsController;

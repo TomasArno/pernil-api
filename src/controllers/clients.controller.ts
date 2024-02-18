@@ -1,9 +1,10 @@
-import { Request, Response } from 'express';
+import { Clients } from "../models/index.model";
+import { BaseController } from "./index.controller";
 
-async function getAll(req: Request, res: Response) {
-	res.json({
-		message: 'This is a test',
-	});
+class ClientsController extends BaseController {
+  constructor() {
+    super(Clients);
+  }
 }
 
-export { getAll };
+export default ClientsController;
