@@ -1,10 +1,12 @@
 import { Clients } from "../models/index.model";
-import { BaseController } from "./index.controller";
+import { BaseManager } from "./index.controller";
 
-class ClientsController extends BaseController {
+class ClientsManager extends BaseManager {
   constructor() {
     super(Clients);
   }
 }
 
-export default ClientsController;
+new ClientsManager();
+
+export default ClientsManager;

@@ -1,10 +1,12 @@
 import { Suppliers } from "../models/index.model";
-import { BaseController } from "./index.controller";
+import { BaseManager } from "./index.controller";
 
-class SuppliersController extends BaseController {
+class SuppliersManager extends BaseManager {
   constructor() {
     super(Suppliers);
   }
 }
+
+const SuppliersController = new SuppliersManager();
 
 export default SuppliersController;

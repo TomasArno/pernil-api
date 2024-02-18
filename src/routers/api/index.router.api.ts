@@ -16,18 +16,18 @@ const router = Router();
 
 // ROUTES
 
-router.all("/auth", authRouter);
-router.all("/users", usersRouter);
-router.all("/clients", clientsRouter);
-router.all("/suppliers", suppliersRouter);
-router.all("/products", productsRouter);
-router.all("/movements", movementsRouter);
-router.all("/categories", categoriesRouter);
+router.use("/auth", authRouter);
+router.use("/users", usersRouter);
+router.use("/clients", clientsRouter);
+router.use("/suppliers", suppliersRouter);
+router.use("/products", productsRouter);
+router.use("/movements", movementsRouter);
+router.use("/categories", categoriesRouter);
 
 // HANDLERS
 
 router.all(
-  "/auth|users|clients|categories|products|movements/",
+  "/auth|users|clients|suppliers|categories|products|movements/",
   handleWrongMethod
 );
 

@@ -1,10 +1,12 @@
 import { Categories } from "../models/index.model";
-import { BaseController } from "./index.controller";
+import { BaseManager } from "./index.controller";
 
-class CategoriesController extends BaseController {
+class CategoriesManager extends BaseManager {
   constructor() {
     super(Categories);
   }
 }
+
+const CategoriesController = new CategoriesManager();
 
 export default CategoriesController;

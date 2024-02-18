@@ -1,5 +1,6 @@
 import express, { json, urlencoded } from "express";
 import helmet from "helmet";
+import morgan from "morgan";
 
 import indexRouter from "./routers/index.router";
 
@@ -12,6 +13,7 @@ const app = express();
 app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(helmet());
+app.use(morgan("dev"));
 
 // ROUTES
 

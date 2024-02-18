@@ -1,10 +1,12 @@
 import { Users } from "../models/index.model";
-import { BaseController } from "./index.controller";
+import { BaseManager } from "./index.controller";
 
-abstract class UsersController extends BaseController {
+class UsersManager extends BaseManager {
   constructor() {
     super(Users);
   }
 }
+
+const UsersController = new UsersManager();
 
 export default UsersController;

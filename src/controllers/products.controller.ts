@@ -1,10 +1,12 @@
 import { Products } from "../models/index.model";
-import { BaseController } from "./index.controller";
+import { BaseManager } from "./index.controller";
 
-class ProductsController extends BaseController {
+class ProductsManager extends BaseManager {
   constructor() {
     super(Products);
   }
 }
+
+const ProductsController = new ProductsManager();
 
 export default ProductsController;

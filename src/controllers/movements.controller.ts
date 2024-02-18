@@ -1,10 +1,12 @@
 import { Movements } from "../models/index.model";
-import { BaseController } from "./index.controller";
+import { BaseManager } from "./index.controller";
 
-class MovementsController extends BaseController {
+class MovementsManager extends BaseManager {
   constructor() {
     super(Movements);
   }
 }
+
+const MovementsController = new MovementsManager();
 
 export default MovementsController;
