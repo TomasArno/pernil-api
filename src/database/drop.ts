@@ -1,3 +1,3 @@
-import { sequelize } from ".";
+import sequelize from '.';
 
 sequelize.sync({ force: true });
