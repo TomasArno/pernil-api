@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import dbRouter from './database.router.api';
 import usersRouter from './users.router.api';
 import clientsRouter from './clients.router.api';
 import suppliersRouter from './suppliers.router.api';
@@ -16,6 +17,7 @@ const router = Router();
 
 // ROUTES
 
+router.use('/status', dbRouter);
 router.use('/auth', authRouter);
 router.use('/users', usersRouter);
 router.use('/clients', clientsRouter);
@@ -27,8 +29,8 @@ router.use('/categories', categoriesRouter);
 // HANDLERS
 
 router.all(
-  /auth|users|clients|suppliers|categories|products|movements/,
-  handleWrongMethod
+	/status|auth|users|clients|suppliers|categories|products|movements/,
+	handleWrongMethod
 );
 
 export default router;
