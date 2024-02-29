@@ -1,15 +1,7 @@
-import { Sequelize, DataTypes, Op, ModelStatic, Model } from "sequelize";
+import { Sequelize, DataTypes, Op, ModelStatic, Model } from 'sequelize';
+import { DB_URL } from '../utils/constants';
 
-const sequelize = new Sequelize(process.env.DB_URL as string, {
-  dialect: "postgres",
-});
+const sequelize = new Sequelize(DB_URL);
 
-try {
-  sequelize.authenticate().then(() => {
-    console.log("Connection has been established successfully.");
-  });
-} catch (error) {
-  console.error("Unable to connect to the database:", error);
-}
-
-export { sequelize, DataTypes, Op, ModelStatic, Model };
+export default sequelize;
+export { DataTypes, Op, ModelStatic, Model };

@@ -1,8 +1,9 @@
-import express, { json, urlencoded } from "express";
-import helmet from "helmet";
-import morgan from "morgan";
+import { isDevEnvironment } from './utils/constants';
+import express, { json, urlencoded } from 'express';
+import helmet from 'helmet';
+import morgan from 'morgan';
 
-import indexRouter from "./routers/index.router";
+import indexRouter from './routers/index.router';
 
 // SERVER
 
@@ -13,10 +14,11 @@ const app = express();
 app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(helmet());
-app.use(morgan("dev"));
+
+isDevEnvironment() ? app.use(morgan('dev')) : app.use(morgan('short'));
 
 // ROUTES
 
-app.use("/", indexRouter);
+app.use('/', indexRouter);
 
 export default app;
