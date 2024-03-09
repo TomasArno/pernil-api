@@ -29,8 +29,8 @@ router.use('/categories', categoriesRouter);
 // HANDLERS
 
 router.all(
-	/status|auth|users|clients|suppliers|categories|products|movements/,
-	handleWrongMethod
+  /status|auth|users|clients|suppliers|categories|products|movements/,
+  handleWrongMethod
 );
 
 export default router;

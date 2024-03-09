@@ -1,36 +1,36 @@
-import { Users } from "./users.model";
-import { Clients } from "./clients.model";
-import { Suppliers } from "./suppliers.model";
-import { Categories } from "./categories.model";
-import { Products } from "./products.model";
-import { Movements } from "./movements.model";
+import { Users } from './users/model';
+import { Clients } from './clients/model';
+import { Suppliers } from './suppliers/model';
+import { Categories } from './categories/model';
+import { Products } from './products/model';
+import { Movements } from './movements/model';
 
 // USERS
 
-// Users.hasMany(Movements);
+Users.hasMany(Movements);
 
-// // CLIENTS
+// CLIENTS
 
-// Clients.hasMany(Movements);
+Clients.hasMany(Movements);
 
-// // SUPPLIERS
+// SUPPLIERS
 
-// Suppliers.hasMany(Movements);
+Suppliers.hasMany(Movements);
 
-// // CATEGORIES
+// CATEGORIES
 
-// Categories.hasMany(Products);
+Categories.hasMany(Products);
 
-// // PRODUCTS
+// PRODUCTS
 
-// Products.hasMany(Movements);
-// Products.belongsTo(Categories);
+Products.hasMany(Movements);
+Products.belongsTo(Categories);
 
-// // MOVEMENTS
+// MOVEMENTS
 
-// Movements.belongsTo(Users);
-// Movements.belongsTo(Clients);
-// Movements.belongsTo(Suppliers);
-// Movements.belongsTo(Products);
+Movements.belongsTo(Users);
+Movements.belongsTo(Clients);
+Movements.belongsTo(Suppliers);
+Movements.belongsTo(Products);
 
 export { Users, Clients, Suppliers, Categories, Products, Movements };

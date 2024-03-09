@@ -8,11 +8,8 @@ const isDevEnvironment = () => ENVIRONMENT === 'development';
 const areEnvironmentVariablesUploaded = () => DB_URL !== 'unknown';
 
 if (!areEnvironmentVariablesUploaded()) {
-	console.error('Environment variables are not setted properly...');
-	process.exit(3);
+  console.error('Environment variables are not setted properly...');
+  process.exit(3);
 }
 
 export { PORT, DB_URL, isDevEnvironment };
-
-
-

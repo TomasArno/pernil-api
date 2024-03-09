@@ -7,7 +7,6 @@
   "license": "MIT",
   "scripts": {
     "dev": "tsnd --env-file .env ./src/index.ts",
-    "drop-db": "tsnd --env-file .env ./src/database/drop",
     "build": "tsc",
     "start": "node ./dist/index.js"
   },
