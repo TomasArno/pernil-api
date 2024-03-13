@@ -1,9 +1,9 @@
-import { Users } from './model';
+import { Suppliers } from '../models/suppliers';
 
-export abstract class UsersSchema {
+export default abstract class SuppliersSchema {
   static async create(data: {}) {
     try {
-      return await Users.create(data);
+      return await Suppliers.create(data);
     } catch (error) {
       throw error;
     }
@@ -12,7 +12,7 @@ export abstract class UsersSchema {
   static async getAll() {
     try {
       // const { order, where, limit, offset } = opt as any;
-      return await Users.findAll();
+      return await Suppliers.findAll();
     } catch (error) {
       throw error;
     }
@@ -20,7 +20,7 @@ export abstract class UsersSchema {
 
   static async getById(id: string) {
     try {
-      return (await Users.findByPk(id))?.dataValues;
+      return (await Suppliers.findByPk(id))?.dataValues;
     } catch (error) {
       throw error;
     }
@@ -28,7 +28,7 @@ export abstract class UsersSchema {
 
   static async updateById(id: string, data: {} = {}) {
     try {
-      return await Users.update(data, {
+      return await Suppliers.update(data, {
         where: { id },
       });
     } catch (error) {
@@ -38,7 +38,7 @@ export abstract class UsersSchema {
 
   static async deleteById(id: string, data: {} = {}) {
     try {
-      return await Users.destroy({
+      return await Suppliers.destroy({
         where: { id },
       });
     } catch (error) {

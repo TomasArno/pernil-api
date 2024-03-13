@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { SuppliersSchema } from '../models/suppliers/schema';
+import SuppliersSchema  from '../services/suppliers';
 abstract class SuppliersController {
   static async create(req: Request, res: Response) {
     try {

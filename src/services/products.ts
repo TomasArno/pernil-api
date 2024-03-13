@@ -1,9 +1,9 @@
-import { Suppliers } from './model';
+import { Products } from '../models/products';
 
-export abstract class SuppliersSchema {
+export default abstract class ProductsSchema {
   static async create(data: {}) {
     try {
-      return await Suppliers.create(data);
+      return await Products.create(data);
     } catch (error) {
       throw error;
     }
@@ -12,7 +12,7 @@ export abstract class SuppliersSchema {
   static async getAll() {
     try {
       // const { order, where, limit, offset } = opt as any;
-      return await Suppliers.findAll();
+      return await Products.findAll();
     } catch (error) {
       throw error;
     }
@@ -20,7 +20,7 @@ export abstract class SuppliersSchema {
 
   static async getById(id: string) {
     try {
-      return (await Suppliers.findByPk(id))?.dataValues;
+      return (await Products.findByPk(id))?.dataValues;
     } catch (error) {
       throw error;
     }
@@ -28,7 +28,7 @@ export abstract class SuppliersSchema {
 
   static async updateById(id: string, data: {} = {}) {
     try {
-      return await Suppliers.update(data, {
+      return await Products.update(data, {
         where: { id },
       });
     } catch (error) {
@@ -38,11 +38,19 @@ export abstract class SuppliersSchema {
 
   static async deleteById(id: string, data: {} = {}) {
     try {
-      return await Suppliers.destroy({
+      return await Products.destroy({
         where: { id },
       });
     } catch (error) {
       throw error;
+    }
+  }
+
+  static async getPrices(id: string) {
+    const searchedProduct = await ProductsSchema.getById(id);
+
+    if (searchedProduct) {
+      return searchedProduct.price;
     }
   }
 }

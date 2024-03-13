@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { ClientsSchema } from '../models/clients/schema';
+import  ClientsSchema  from '../services/clients';
 
 abstract class ClientsController {
   static async create(req: Request, res: Response) {
