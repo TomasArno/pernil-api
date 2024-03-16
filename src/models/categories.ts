@@ -1,4 +1,4 @@
-import sequelize, { DataTypes } from '../../database';
+import sequelize, { DataTypes } from '../database';
 
 export const Categories = sequelize.define('Category', {
   name: {

@@ -1,4 +1,4 @@
-import sequelize, { DataTypes } from '../../database';
+import sequelize, { DataTypes } from '../database';
 
 export const Movements = sequelize.define('Movement', {
   amount: {

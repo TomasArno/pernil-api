@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
-import { MovementsSchema } from '../models/movements/schema';
-import { ProductsSchema } from '../models/products/schema';
+import  MovementsSchema  from '../services/movements';
+import  ProductsSchema  from '../services/products';
 
 abstract class MovementsController {
   static async create(req: Request, res: Response) {

@@ -1,9 +1,9 @@
-import { Movements, Users, Clients, Suppliers } from '../index.model';
+import { Categories } from '../models/categories';
 
-export abstract class MovementsSchema {
+export default abstract class CategoriesSchema {
   static async create(data: {}) {
     try {
-      return await Movements.create(data);
+      return await Categories.create(data);
     } catch (error) {
       throw error;
     }
@@ -12,16 +12,7 @@ export abstract class MovementsSchema {
   static async getAll() {
     try {
       // const { order, where, limit, offset } = opt as any;
-      return await Movements.findAll({
-        include: [
-          { model: Users, attributes: ['fullName'] },
-          { model: Clients, attributes: ['name'] },
-          { model: Suppliers, attributes: ['name'] },
-        ],
-        attributes: {
-          exclude: ['UserId', 'ClientId', 'SupplierId', 'ProductId'],
-        },
-      });
+      return await Categories.findAll();
     } catch (error) {
       throw error;
     }
@@ -29,7 +20,7 @@ export abstract class MovementsSchema {
 
   static async getById(id: string) {
     try {
-      return await Movements.findByPk(id);
+      return (await Categories.findByPk(id))?.dataValues;
     } catch (error) {
       throw error;
     }
@@ -37,7 +28,7 @@ export abstract class MovementsSchema {
 
   static async updateById(id: string, data: {} = {}) {
     try {
-      return await Movements.update(data, {
+      return await Categories.update(data, {
         where: { id },
       });
     } catch (error) {
@@ -47,7 +38,7 @@ export abstract class MovementsSchema {
 
   static async deleteById(id: string, data: {} = {}) {
     try {
-      return await Movements.destroy({
+      return await Categories.destroy({
         where: { id },
       });
     } catch (error) {

@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
 
-import { UsersSchema } from '../models/users/schema';
+import  UsersService  from '../services/users';
+
 abstract class UsersController {
   static async create(req: Request, res: Response) {
     try {
-      const resource = await UsersSchema.create(req.body);
+      const resource = await UsersService.create(req.body);
 
       res.status(200).json({
         data: resource,
@@ -17,7 +18,7 @@ abstract class UsersController {
   static async getAll(req: Request, res: Response) {
     try {
       // const { order, where, limit, offset } = opt as any;
-      const all = await UsersSchema.getAll();
+      const all = await UsersService.getAll();
 
       res.status(200).json({
         data: all,
@@ -31,7 +32,7 @@ abstract class UsersController {
     try {
       const { id } = req.params;
 
-      const resource = await UsersSchema.getById(id);
+      const resource = await UsersService.getById(id);
 
       // hacer trow si es null resource
 
@@ -47,7 +48,7 @@ abstract class UsersController {
     try {
       const { id } = req.params;
 
-      const a = await UsersSchema.updateById(id, req.body);
+      const a = await UsersService.updateById(id, req.body);
 
       // si es 0 hacer throw
 
@@ -63,7 +64,7 @@ abstract class UsersController {
     try {
       const { id } = req.params;
 
-      const a = await UsersSchema.deleteById(id);
+      const a = await UsersService.deleteById(id);
 
       // si a es 0 hacer throw
 

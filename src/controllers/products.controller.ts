@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { ProductsSchema } from '../models/products/schema';
+import  ProductsSchema  from '../services/products';
 abstract class ProductsController {
   static async create(req: Request, res: Response) {
     try {

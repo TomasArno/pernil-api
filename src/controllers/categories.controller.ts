@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { CategoriesSchema } from '../models/categories/schema';
+import CategoriesSchema  from '../services/categories';
 
 abstract class CategoriesController {
   static async create(req: Request, res: Response) {

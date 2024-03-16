@@ -1,4 +1,4 @@
-import sequelize, { DataTypes } from '../../database';
+import sequelize, { DataTypes } from '../database';
 
 export const Suppliers = sequelize.define('Supplier', {
   name: {

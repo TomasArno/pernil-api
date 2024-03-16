@@ -1,9 +1,9 @@
-import { Users } from './users/model';
-import { Clients } from './clients/model';
-import { Suppliers } from './suppliers/model';
-import { Categories } from './categories/model';
-import { Products } from './products/model';
-import { Movements } from './movements/model';
+import { Users } from './users';
+import { Clients } from './clients';
+import { Suppliers } from './suppliers';
+import { Categories } from './categories';
+import { Products } from './products';
+import { Movements } from './movements';
 
 // USERS
 
