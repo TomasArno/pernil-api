@@ -14,6 +14,7 @@ const app = express();
 app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(helmet());
+app.disable('x-powered-by');
 
 isDevEnvironment() ? app.use(morgan('dev')) : app.use(morgan('short'));
 

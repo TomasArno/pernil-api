@@ -1,6 +1,6 @@
 import { Movements, Users, Clients, Suppliers } from '../models/index.model';
 
-export default abstract class MovementsSchema {
+export default abstract class MovementsService {
   static async create(data: {}) {
     try {
       return await Movements.create(data);

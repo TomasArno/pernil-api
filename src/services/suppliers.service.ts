@@ -1,9 +1,9 @@
-import { Clients } from '../models/clients';
+import { Suppliers } from '../models/suppliers.model';
 
-export default abstract class ClientsSchema {
+export default abstract class SuppliersService {
   static async create(data: {}) {
     try {
-      return await Clients.create(data);
+      return await Suppliers.create(data);
     } catch (error) {
       throw error;
     }
@@ -12,7 +12,7 @@ export default abstract class ClientsSchema {
   static async getAll() {
     try {
       // const { order, where, limit, offset } = opt as any;
-      return await Clients.findAll();
+      return await Suppliers.findAll();
     } catch (error) {
       throw error;
     }
@@ -20,7 +20,7 @@ export default abstract class ClientsSchema {
 
   static async getById(id: string) {
     try {
-      return (await Clients.findByPk(id))?.dataValues;
+      return (await Suppliers.findByPk(id))?.dataValues;
     } catch (error) {
       throw error;
     }
@@ -28,7 +28,7 @@ export default abstract class ClientsSchema {
 
   static async updateById(id: string, data: {} = {}) {
     try {
-      return await Clients.update(data, {
+      return await Suppliers.update(data, {
         where: { id },
       });
     } catch (error) {
@@ -38,7 +38,7 @@ export default abstract class ClientsSchema {
 
   static async deleteById(id: string, data: {} = {}) {
     try {
-      return await Clients.destroy({
+      return await Suppliers.destroy({
         where: { id },
       });
     } catch (error) {

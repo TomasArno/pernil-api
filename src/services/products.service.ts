@@ -1,6 +1,6 @@
-import { Products } from '../models/products';
+import { Products } from '../models/products.model';
 
-export default abstract class ProductsSchema {
+export default abstract class ProductsService {
   static async create(data: {}) {
     try {
       return await Products.create(data);
@@ -47,7 +47,7 @@ export default abstract class ProductsSchema {
   }
 
   static async getPrices(id: string) {
-    const searchedProduct = await ProductsSchema.getById(id);
+    const searchedProduct = await ProductsService.getById(id);
 
     if (searchedProduct) {
       return searchedProduct.price;

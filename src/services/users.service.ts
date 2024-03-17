@@ -1,4 +1,4 @@
-import { Users } from '../models/users';
+import { Users } from '../models/users.model';
 
 export default abstract class UsersService {
   static async create(data: {}) {
@@ -9,19 +9,26 @@ export default abstract class UsersService {
     }
   }
 
-  static async getAll(filter:{}) {
+  static async getAll(filter: {}) {
     try {
       // const { order, where, limit, offset } = opt as any;
-      return await Users.findAll({where: filter});
+      const users = await Users.findAll({ where: filter });
+
+      const usersParsed = users.map((element) => element.dataValues);
+
+      return usersParsed;
     } catch (error) {
       throw error;
     }
   }
 
-  static async getByEmail(email) {
+  static async getByFullName(fullName) {
     try {
       // const { order, where, limit, offset } = opt as any;
-      return await this.getAll({email})
+
+      const user = (await this.getAll({ fullName }))[0];
+
+      return user ? user : {};
     } catch (error) {
       throw error;
     }

@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 
-import  ProductsSchema  from '../services/products';
+import Products from '../services/products.service';
 abstract class ProductsController {
   static async create(req: Request, res: Response) {
     try {
-      const resource = await ProductsSchema.create(req.body);
+      const resource = await Products.create(req.body);
 
       res.status(200).json({
         data: resource,
@@ -17,7 +17,7 @@ abstract class ProductsController {
   static async getAll(req: Request, res: Response) {
     try {
       // const { order, where, limit, offset } = opt as any;
-      const all = await ProductsSchema.getAll();
+      const all = await Products.getAll();
 
       res.status(200).json({
         data: all,
@@ -31,7 +31,7 @@ abstract class ProductsController {
     try {
       const { id } = req.params;
 
-      const resource = await ProductsSchema.getById(id);
+      const resource = await Products.getById(id);
 
       // hacer trow si es null resource
 
@@ -47,7 +47,7 @@ abstract class ProductsController {
     try {
       const { id } = req.params;
 
-      const a = await ProductsSchema.updateById(id, req.body);
+      const a = await Products.updateById(id, req.body);
 
       // si es 0 hacer throw
 
@@ -63,7 +63,7 @@ abstract class ProductsController {
     try {
       const { id } = req.params;
 
-      const a = await ProductsSchema.deleteById(id);
+      const a = await Products.deleteById(id);
 
       // si a es 0 hacer throw
 

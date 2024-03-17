@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 
-import CategoriesSchema  from '../services/categories';
+import Categories from '../services/subcategories.service';
 
 abstract class CategoriesController {
   static async create(req: Request, res: Response) {
     try {
-      const resource = await CategoriesSchema.create(req.body);
+      const resource = await Categories.create(req.body);
 
       res.status(200).json({
         data: resource,
@@ -18,7 +18,7 @@ abstract class CategoriesController {
   static async getAll(req: Request, res: Response) {
     try {
       // const { order, where, limit, offset } = opt as any;
-      const all = await CategoriesSchema.getAll();
+      const all = await Categories.getAll();
 
       res.status(200).json({
         data: all,
@@ -32,7 +32,7 @@ abstract class CategoriesController {
     try {
       const { id } = req.params;
 
-      const resource = await CategoriesSchema.getById(id);
+      const resource = await Categories.getById(id);
 
       // hacer trow si es null resource
 
@@ -48,7 +48,7 @@ abstract class CategoriesController {
     try {
       const { id } = req.params;
 
-      const a = await CategoriesSchema.updateById(id, req.body);
+      const a = await Categories.updateById(id, req.body);
 
       // si es 0 hacer throw
 
@@ -64,7 +64,7 @@ abstract class CategoriesController {
     try {
       const { id } = req.params;
 
-      const a = await CategoriesSchema.deleteById(id);
+      const a = await Categories.deleteById(id);
 
       // si a es 0 hacer throw
 

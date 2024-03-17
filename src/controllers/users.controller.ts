@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 
-import  UsersService  from '../services/users';
+import Users from '../services/users.service';
 
 abstract class UsersController {
   static async create(req: Request, res: Response) {
     try {
-      const resource = await UsersService.create(req.body);
+      const resource = await Users.create(req.body);
 
       res.status(200).json({
         data: resource,
@@ -18,7 +18,7 @@ abstract class UsersController {
   static async getAll(req: Request, res: Response) {
     try {
       // const { order, where, limit, offset } = opt as any;
-      const all = await UsersService.getAll();
+      const all = await Users.getAll(req.query);
 
       res.status(200).json({
         data: all,
@@ -32,7 +32,7 @@ abstract class UsersController {
     try {
       const { id } = req.params;
 
-      const resource = await UsersService.getById(id);
+      const resource = await Users.getById(id);
 
       // hacer trow si es null resource
 
@@ -48,7 +48,7 @@ abstract class UsersController {
     try {
       const { id } = req.params;
 
-      const a = await UsersService.updateById(id, req.body);
+      const a = await Users.updateById(id, req.body);
 
       // si es 0 hacer throw
 
@@ -64,7 +64,7 @@ abstract class UsersController {
     try {
       const { id } = req.params;
 
-      const a = await UsersService.deleteById(id);
+      const a = await Users.deleteById(id);
 
       // si a es 0 hacer throw
 
