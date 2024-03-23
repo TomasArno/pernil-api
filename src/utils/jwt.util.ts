@@ -1,6 +1,4 @@
-import { sign, verify } from 'jsonwebtoken';
-
-export const verifyToken = (token) => verify(token, process.env.JWT_SECRET);
+import { sign } from 'jsonwebtoken';
 
 export const createToken = (data) =>
   sign(data, process.env.JWT_SECRET, {

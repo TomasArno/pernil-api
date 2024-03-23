@@ -6,7 +6,7 @@ import Auth from '../services/auth.service';
 import Users from '../services/users.service';
 
 import { createHash, verifyPassword, genSalt } from '../utils/hash.util';
-import { createToken, verifyToken } from '../utils/jwt.util';
+import { createToken } from '../utils/jwt.util';
 
 passport.use(
   'register',
@@ -76,6 +76,27 @@ passport.use(
   )
 );
 
-///  JWT PASSPORT
+passport.use(
+  'jwt',
+  new JwtStrategy(
+    {
+      jwtFromRequest: ExtractJwt.fromExtractors([
+        (req) => req?.cookies['token'],
+      ]),
+      secretOrKey: process.env.JWT_SECRET,
+    },
+    async (payload, done) => {
+      try {
+        const user = await Users.getByFullName(payload.fullName);
+
+        if (!user) return done(null, false);
+
+        done(null, user);
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+);
 
 export default passport;

@@ -1,9 +1,5 @@
 import { Router } from 'express';
 
-// CONTROLLERS
-
-import AuthController from '../../controllers/auth.controller';
-
 // MIDDLEWARES
 
 import passportCb from '../../middlewares/passportCb.mid';
@@ -35,12 +31,23 @@ router.post('/login', passportCb('login'), async (req, res, next) => {
     res
       .cookie('token', req['token'], {
         maxAge: 7 * 24 * 60 * 60 * 1000,
-        httpOnly: true,
+        // httpOnly: true,
       })
       .json({
         statusCode: 200,
         message: 'Logged in!',
       });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete('/cookie', passportCb('jwt'), async (req, res, next) => {
+  try {
+    res.clearCookie('token').json({
+      statusCode: 200,
+      message: 'Cookie deleted',
+    });
   } catch (error) {
     next(error);
   }
