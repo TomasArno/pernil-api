@@ -1,5 +1,7 @@
 import { Router } from 'express';
 
+// ROUTERS
+
 import dbRouter from './database.router.api';
 import usersRouter from './users.router.api';
 import clientsRouter from './clients.router.api';
@@ -9,6 +11,9 @@ import productsRouter from './products.router.api';
 import movementsRouter from './movements.router.api';
 import authRouter from './auth.router.api';
 
+// MIDDLEWARES
+
+import passportCb from '../../middlewares/passportCb.mid';
 import handleWrongMethod from '../../middlewares/wrongMethodHandler.mid';
 
 // ROUTER
@@ -19,12 +24,12 @@ const router = Router();
 
 router.use('/status', dbRouter);
 router.use('/auth', authRouter);
-router.use('/users', usersRouter);
-router.use('/clients', clientsRouter);
-router.use('/suppliers', suppliersRouter);
-router.use('/products', productsRouter);
-router.use('/movements', movementsRouter);
-router.use('/categories', categoriesRouter);
+router.use('/users', passportCb('jwt'), usersRouter);
+router.use('/clients', passportCb('jwt'), clientsRouter);
+router.use('/suppliers', passportCb('jwt'), suppliersRouter);
+router.use('/products', passportCb('jwt'), productsRouter);
+router.use('/movements', passportCb('jwt'), movementsRouter);
+router.use('/categories', passportCb('jwt'), categoriesRouter);
 
 // HANDLERS
 

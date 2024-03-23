@@ -1,13 +1,16 @@
-import { Users } from './users';
-import { Clients } from './clients';
-import { Suppliers } from './suppliers';
-import { Categories } from './categories';
-import { Products } from './products';
-import { Movements } from './movements';
+import { Users } from './users.model';
+import { Clients } from './clients.model';
+import { Suppliers } from './suppliers.model';
+import { Categories } from './categories.model';
+import { Subcategories } from './subcategories.model';
+import { Products } from './products.model';
+import { Movements } from './movements.model';
+import { Auth } from './auth.model';
 
 // USERS
 
 Users.hasMany(Movements);
+Users.hasOne(Auth);
 
 // CLIENTS
 
@@ -20,6 +23,11 @@ Suppliers.hasMany(Movements);
 // CATEGORIES
 
 Categories.hasMany(Products);
+Categories.hasMany(Subcategories);
+
+// SUBCATEGORIES
+
+Subcategories.belongsTo(Categories);
 
 // PRODUCTS
 
@@ -33,4 +41,13 @@ Movements.belongsTo(Clients);
 Movements.belongsTo(Suppliers);
 Movements.belongsTo(Products);
 
-export { Users, Clients, Suppliers, Categories, Products, Movements };
+export {
+  Auth,
+  Users,
+  Clients,
+  Suppliers,
+  Categories,
+  Subcategories,
+  Products,
+  Movements,
+};

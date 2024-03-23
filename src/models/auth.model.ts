@@ -1,7 +1,7 @@
 import sequelize, { DataTypes } from '../database';
 
-export const Users = sequelize.define('User', {
-  fullName: {
+export const Auth = sequelize.define('Auth', {
+  password: {
     type: DataTypes.STRING,
     allowNull: false,
   },

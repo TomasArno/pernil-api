@@ -1,15 +1,13 @@
+import { randomUUID } from 'node:crypto';
+
 const PORT = Number(process.env.PORT) || 63009;
 
-const ENVIRONMENT = process.env.ENVIRONMENT || 'unknown';
+const ENVIRONMENT = process.env.ENVIRONMENT || 'development';
 
-const DB_URL = process.env.DB_URL || 'unknown';
+const DB_URL = process.env.DB_URL || null;
+
+const PEPPER = 'lalalallalala';
 
 const isDevEnvironment = () => ENVIRONMENT === 'development';
-const areEnvironmentVariablesUploaded = () => DB_URL !== 'unknown';
 
-if (!areEnvironmentVariablesUploaded()) {
-  console.error('Environment variables are not setted properly...');
-  process.exit(3);
-}
-
-export { PORT, DB_URL, isDevEnvironment };
+export { PORT, DB_URL, PEPPER, isDevEnvironment };

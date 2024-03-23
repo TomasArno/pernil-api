@@ -1,9 +1,9 @@
-import { Categories } from '../models/categories';
+import { Clients } from '../models/clients.model';
 
-export default abstract class CategoriesSchema {
+export default abstract class ClientsService {
   static async create(data: {}) {
     try {
-      return await Categories.create(data);
+      return (await Clients.create(data))?.dataValues;
     } catch (error) {
       throw error;
     }
@@ -12,7 +12,7 @@ export default abstract class CategoriesSchema {
   static async getAll() {
     try {
       // const { order, where, limit, offset } = opt as any;
-      return await Categories.findAll();
+      return await Clients.findAll();
     } catch (error) {
       throw error;
     }
@@ -20,7 +20,7 @@ export default abstract class CategoriesSchema {
 
   static async getById(id: string) {
     try {
-      return (await Categories.findByPk(id))?.dataValues;
+      return (await Clients.findByPk(id))?.dataValues;
     } catch (error) {
       throw error;
     }
@@ -28,7 +28,7 @@ export default abstract class CategoriesSchema {
 
   static async updateById(id: string, data: {} = {}) {
     try {
-      return await Categories.update(data, {
+      return await Clients.update(data, {
         where: { id },
       });
     } catch (error) {
@@ -38,7 +38,7 @@ export default abstract class CategoriesSchema {
 
   static async deleteById(id: string, data: {} = {}) {
     try {
-      return await Categories.destroy({
+      return await Clients.destroy({
         where: { id },
       });
     } catch (error) {

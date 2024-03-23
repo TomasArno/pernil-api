@@ -1,8 +1,8 @@
-import { NextFunction, Request, Router } from "express";
+import { NextFunction, Request, Router } from 'express';
 
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
-import UsersService from "../services/users";
+import UsersService from '../services/users.service';
 
 export default class CustomRouter {
   private _router: any;
@@ -37,9 +37,9 @@ export default class CustomRouter {
     res.success201 = (payload) =>
       res.json({ statusCode: 201, response: payload });
     res.error400 = (message) => res.json({ statusCode: 400, message });
-    res.error401 = () => res.json({ statusCode: 401, message: "Bad auth" });
-    res.error403 = () => res.json({ statusCode: 403, message: "Forbidden" });
-    res.error404 = () => res.json({ statusCode: 404, message: "Not found" });
+    res.error401 = () => res.json({ statusCode: 401, message: 'Bad auth' });
+    res.error403 = () => res.json({ statusCode: 403, message: 'Forbidden' });
+    res.error404 = () => res.json({ statusCode: 404, message: 'Not found' });
 
     next();
   };
@@ -47,32 +47,31 @@ export default class CustomRouter {
   policies =
     (arrayOfPolicies: string[]) => async (req, res, next: NextFunction) => {
       try {
-        if (arrayOfPolicies.includes("PUBLIC")) return next();
+        if (arrayOfPolicies.includes('PUBLIC')) return next();
 
-        let token = req.cookies["token"];
+        let token = req.cookies['token'];
         if (!token) return res.error401();
 
-        const data = jwt.verify(token, process.env.SECRET) as { email; role };
-        if (!data) return res.error400("Bad auth by token");
-
-        const { email, role } = data;
-
-        const user = await UsersService.getByEmail(email);
-
-        const roles = {
-          0: "USER",
-          1: "ADMIN",
+        const data = jwt.verify(token, process.env.SECRET) as {
+          fullName;
+          role;
         };
 
+        if (!data) return res.error400('Bad auth by token');
+
+        const { fullName, role } = data;
+
+        const user = await UsersService.getByFullName(fullName);
+
         if (
-          (role === 0 && arrayOfPolicies.includes("USER")) ||
-          (role === 1 && arrayOfPolicies.includes("ADMIN"))
+          (role === 0 && arrayOfPolicies.includes('USER')) ||
+          (role === 1 && arrayOfPolicies.includes('ADMIN'))
         ) {
           req.user = user;
-          next();
-        } else {
-          res.error403();
+          return next();
         }
+
+        res.error403();
       } catch (error) {
         return next(error);
       }
