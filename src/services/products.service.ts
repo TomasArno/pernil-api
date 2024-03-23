@@ -3,7 +3,7 @@ import { Products } from '../models/products.model';
 export default abstract class ProductsService {
   static async create(data: {}) {
     try {
-      return await Products.create(data);
+      return (await Products.create(data))?.dataValues;
     } catch (error) {
       throw error;
     }

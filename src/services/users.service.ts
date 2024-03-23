@@ -3,7 +3,7 @@ import { Users } from '../models/users.model';
 export default abstract class UsersService {
   static async create(data: {}) {
     try {
-      return await Users.create(data);
+      return (await Users.create(data))?.dataValues;
     } catch (error) {
       throw error;
     }
@@ -16,7 +16,7 @@ export default abstract class UsersService {
 
       const usersParsed = users.map((element) => element.dataValues);
 
-      return usersParsed;
+      return usersParsed.length ? usersParsed : null;
     } catch (error) {
       throw error;
     }
@@ -24,11 +24,9 @@ export default abstract class UsersService {
 
   static async getByFullName(fullName) {
     try {
-      // const { order, where, limit, offset } = opt as any;
+      const user = await this.getAll({ fullName });
 
-      const user = (await this.getAll({ fullName }))[0];
-
-      return user ? user : {};
+      return user ? user[0] : null;
     } catch (error) {
       throw error;
     }

@@ -3,7 +3,7 @@ import { Clients } from '../models/clients.model';
 export default abstract class ClientsService {
   static async create(data: {}) {
     try {
-      return await Clients.create(data);
+      return (await Clients.create(data))?.dataValues;
     } catch (error) {
       throw error;
     }

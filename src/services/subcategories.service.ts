@@ -3,7 +3,7 @@ import { Subcategories } from '../models/subcategories.model';
 export default abstract class CategoriesService {
   static async create(data: {}) {
     try {
-      return await Subcategories.create(data);
+      return (await Subcategories.create(data))?.dataValues;
     } catch (error) {
       throw error;
     }

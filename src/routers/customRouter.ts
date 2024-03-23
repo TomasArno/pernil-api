@@ -52,27 +52,26 @@ export default class CustomRouter {
         let token = req.cookies['token'];
         if (!token) return res.error401();
 
-        const data = jwt.verify(token, process.env.SECRET) as { email; role };
+        const data = jwt.verify(token, process.env.SECRET) as {
+          fullName;
+          role;
+        };
+
         if (!data) return res.error400('Bad auth by token');
 
-        const { email, role } = data;
+        const { fullName, role } = data;
 
-        const user = await UsersService.getByEmail(email);
-
-        const roles = {
-          0: 'USER',
-          1: 'ADMIN',
-        };
+        const user = await UsersService.getByFullName(fullName);
 
         if (
           (role === 0 && arrayOfPolicies.includes('USER')) ||
           (role === 1 && arrayOfPolicies.includes('ADMIN'))
         ) {
           req.user = user;
-          next();
-        } else {
-          res.error403();
+          return next();
         }
+
+        res.error403();
       } catch (error) {
         return next(error);
       }

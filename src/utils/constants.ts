@@ -6,7 +6,7 @@ const ENVIRONMENT = process.env.ENVIRONMENT || 'development';
 
 const DB_URL = process.env.DB_URL || null;
 
-const PEPPER = randomUUID();
+const PEPPER = 'lalalallalala';
 
 const isDevEnvironment = () => ENVIRONMENT === 'development';
 

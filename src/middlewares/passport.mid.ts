@@ -2,24 +2,38 @@ import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt';
 
+import Auth from '../services/auth.service';
 import Users from '../services/users.service';
 
-import { createHash } from '../utils/hash.util';
+import { createHash, verifyPassword, genSalt } from '../utils/hash.util';
+import { createToken, verifyToken } from '../utils/jwt.util';
 
 passport.use(
   'register',
   new LocalStrategy(
     { passReqToCallback: true, usernameField: 'fullName' },
-    async (req, fullName, password, done) => {
+    async (
+      req,
+      fullName,
+      password,
+      done: (error: Error, user?: {}, opt?) => void
+    ) => {
       try {
         const searchedUser = await Users.getByFullName(fullName);
 
-        if (searchedUser.id)
-          return done(null, false, { message: 'User already exists' });
+        if (searchedUser)
+          return done(null, false, {
+            message: 'User already exists',
+            statusCode: 400,
+          });
 
-        req.body.password = createHash(password);
+        const salt = genSalt();
+        const hashPassword = createHash(salt, password);
 
-        const user = await Users.create(req.body);
+        const user = await Users.create({ fullName });
+        await Auth.create({ UserId: user.id, password: hashPassword });
+
+        req['token'] = createToken({ fullName });
 
         done(null, user);
       } catch (error) {
@@ -29,7 +43,39 @@ passport.use(
   )
 );
 
-/// LOGIN
+passport.use(
+  'login',
+  new LocalStrategy(
+    { passReqToCallback: true, usernameField: 'fullName' },
+    async (
+      req,
+      fullName,
+      incomingPassword,
+      done: (error: Error, user?: {}, opt?) => void
+    ) => {
+      try {
+        const user = await Users.getByFullName(fullName);
+        if (!user) return done(null, false, { message: 'bad auth' });
+
+        const { password } = await Auth.getById(user.id);
+
+        const [storedSalt] = password.split(':');
+
+        const hashedPassword = createHash(storedSalt, incomingPassword);
+
+        if (!verifyPassword(password, hashedPassword))
+          return done(null, false, { message: 'bad auth' });
+
+        req['token'] = createToken({ fullName });
+
+        done(null, user);
+      } catch (error) {
+        done(error);
+      }
+    }
+  )
+);
+
 ///  JWT PASSPORT
 
 export default passport;

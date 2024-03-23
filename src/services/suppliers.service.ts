@@ -3,7 +3,7 @@ import { Suppliers } from '../models/suppliers.model';
 export default abstract class SuppliersService {
   static async create(data: {}) {
     try {
-      return await Suppliers.create(data);
+      return (await Suppliers.create(data))?.dataValues;
     } catch (error) {
       throw error;
     }
